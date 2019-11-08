@@ -1,42 +1,28 @@
 import React, { useEffect, useState } from "react";
-// import styled from "styled-components";
+import styled from "styled-components";
 import axios from "axios";
 import "./App.css";
 import CharacterCard from "./components/characterCard";
 
-// const PaginationDiv = styled.div`
-// 	width: 100%;
+const PaginationDiv = styled.div`
+	width: 100%;
+	text-align: center;
+	font-size: 2em;
+	color: black;
+	text-decoration: none;
+`;
 
-// 	text-align: center;
-
-// 	font-size: 2em;
-
-// 	color: black;
-
-// 	text-decoration: none;
-// `;
-
-// const PaginationBtn = styled.button`
-
-//   background-color: tomato;
-
-//   padding: 2%;
-
-//   border: 1px black solid;
-
-//   border-radius: 5px;
-
-//   margin: 0 1%;
-
-//   width: 120px;
-
-//   font-size: 0.5em;
-
-//   transition: 0.3s ease-in-out;
-
-//   :hover:background-color: lightblue;
-
-// `;
+const PaginationBtn = styled.button`
+  background-color: tomato;
+  padding: 2%;
+  border: 1px black solid;
+  border-radius: 5px;
+  margin: 0 1%;
+  width: 120px;
+  font-size: 0.5em;
+  transition: 0.3s ease-in-out;
+  :hover:background-color: lightblue;
+ `;
 
 const App = () => {
 	// Try to think through what state you'll need for this app before starting.
@@ -50,7 +36,6 @@ const App = () => {
 	// sync up with, if any.
 
 	const [characters, setCharacters] = useState([]);
-
 	const [page, setPage] = useState(1);
 
 	useEffect(() => {
@@ -63,7 +48,7 @@ const App = () => {
 
 				.then(data => setCharacters(data.results))
 
-				.catch(err => console.log("somthing wrong"));
+				.catch(error => console.log("somthing went wrong"));
 		};
 
 		getCharacters();
@@ -77,19 +62,19 @@ const App = () => {
 		<div className="App">
 			<h1 className="Header">React Wars</h1>
 
-			// <PaginationDiv>
-			// 	{page > 1 ? (
-			// 		<PaginationBtn onClick={e => setPage(prevPage => prevPage - 1)}>
-			// 			previous &laquo;
-			// 		</PaginationBtn>
-			// 	) : null}
+			<PaginationDiv>
+				{page > 1 ? (
+					<PaginationBtn onClick={e => setPage(prevPage => prevPage - 1)}>
+						previous &laquo;
+					</PaginationBtn>
+				) : null}
 
-			// 	{page < 10 ? (
-			// 		<PaginationBtn onClick={e => setPage(prevPage => prevPage + 1)}>
-			// 			&raquo; next
-			// 		</PaginationBtn>
-			// 	) : null}
-			// </PaginationDiv>
+				{page < 10 ? (
+					<PaginationBtn onClick={e => setPage(prevPage => prevPage + 1)}>
+						&raquo; next
+					</PaginationBtn>
+				) : null}
+			</PaginationDiv>
 
 			<div className="card-container">
 				{characters.map((character, idx) => (
